@@ -1,48 +1,47 @@
 // Your code here
 class Polygon {
-
-  constructor(array) {
-    this.array = array;
-    this.count = this.array.length;
+  constructor(sides) {
+    this.sides = sides
   }
-
-  get getCount () {
-    return this.array.length;
+  get countSides() {
+    return this.sides.length
   }
-
   get perimeter() {
-    let total = 0;
-    for (let i = 0; i < this.count; i++) {
-      total += this.array[i];
+    let sum = 0;
+    for (let i = 0; i < this.countSides; i++) {
+      let side = this.sides[i];
+      sum += side;
     }
-    return total;
+    return sum
   }
-
 }
-
 class Triangle extends Polygon {
-
   get isValid() {
-    let x = this.array[0];
-    let y = this.array[1];
-    let z = this.array[2];
-    return ((x + y > z) && (x + z > y) && (y + z > x)) ? true : false
+    let side1 = this.sides[0]
+    let side2 = this.sides[1]
+    let side3 = this.sides[2]
+    if (this.countSides !== 3) {
+      return;
+    }
+    return ( ( side1 === side2 ) && ( side1 === side3 ) && ( side2 === side3 ) )
   }
-
 }
-
 class Square extends Polygon {
-
-  get isValid() {
-    let w = this.array[0];
-    let x = this.array[1];
-    let y = this.array[2];
-    let z = this.array[3];
-    return ((w === x) && (w === y) && (w === z)) ? true : false
-  }
-
   get area() {
-    return this.array[0] ** 2;
+    if (this.isValid) {
+      let side1 = this.sides[0]
+      let side2 = this.sides[1]
+      return side1 * side2
+    }
   }
-
+  get isValid() {
+    let side1 = this.sides[0]
+    let side2 = this.sides[1]
+    let side3 = this.sides[2]
+    let side4 = this.sides[3]
+    if (this.countSides !== 4) {
+      return;
+    }
+    return ( ( side1 === side2 ) && ( side1 === side3 ) && ( side2 === side3 ) && ( side3 === side4 ) )
+  }
 }
